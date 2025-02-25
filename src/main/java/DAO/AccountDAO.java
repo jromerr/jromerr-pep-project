@@ -21,7 +21,7 @@ public class AccountDAO {
         return null;
     }
 
-    public Account getAccountById(int accId){
+    public Account getAccountByAccountId(int accId){
         return null;
     }
 }
