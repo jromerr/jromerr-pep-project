@@ -13,7 +13,7 @@ public class AccountDAO {
         return null;
     }
 
-    public Account inserAccount(Account account){
+    public Account insertAccount(Account account){
         return null;
     }
 
