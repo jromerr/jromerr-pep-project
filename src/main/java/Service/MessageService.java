@@ -27,12 +27,12 @@ public class MessageService {
         return messageDAO.getAllMessages();
     }
 
-    public Message getMessageByMessageId(Message message){
-        return messageDAO.getMessageByMessageId(message.getMessage_id());
+    public Message getMessageByMessageId(int messageId){
+        return messageDAO.getMessageByMessageId(messageId);
     }
 
-    public Message deleteMessage(Message message){
-        return messageDAO.deleteMessageByMessageId(message.getMessage_id());
+    public Message deleteMessage(int messageId){
+        return messageDAO.deleteMessageByMessageId(messageId);
     }
 
     public Message replaceMessage(Message message){
