@@ -42,7 +42,7 @@ public class MessageService {
         return null;
     }
 
-    public List<Message> getAllMessagesFromAccount(Message message){
-        return messageDAO.getAllMessagesByAccountId(message.getPosted_by());
+    public List<Message> getAllMessagesFromAccount(int accountId){
+        return messageDAO.getAllMessagesByAccountId(accountId);
     }
 }
