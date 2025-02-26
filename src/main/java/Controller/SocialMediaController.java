@@ -93,7 +93,11 @@ public class SocialMediaController {
     private void getMessageByIdHandler(Context ctx){
         String messageId = ctx.pathParam("message_id");
         Message message = messageService.getMessageByMessageId(Integer.parseInt(messageId));
-        ctx.json(message);
+        if(message != null){
+            ctx.json(message);
+        }else{
+            ctx.status(200);
+        }
     }
 
     private void deleteMessageHandler(Context ctx){
