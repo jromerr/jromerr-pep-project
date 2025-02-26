@@ -1,5 +1,7 @@
 package Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -37,7 +39,37 @@ public class SocialMediaController {
         context.json("sample text");
     }
 
-    
+    private void postNewAccountHandler(Context ctx) throws JsonProcessingException {
+
+    }
+
+    private void postLoginAccountHandler(Context ctx) throws JsonProcessingException {
+
+    }
+
+    private void postNewMessageHandler(Context ctx) throws JsonProcessingException {
+
+    }
+
+    private void getAllMessagesHandler(Context ctx){
+
+    }
+
+    private void getMessageByIdHandler(Context ctx){
+
+    }
+
+    private void deleteMessageHandler(Context ctx){
+
+    }
+
+    private void patchMessageHandler(Context ctx){
+
+    }
+
+    private void getMessagesByAccountHandler(Context ctx){
+        
+    }
 
 
 }
