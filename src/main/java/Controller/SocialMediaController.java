@@ -10,6 +10,7 @@ import Service.MessageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.List;
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
  * found in readme.md as well as the test cases. You should
@@ -63,31 +64,59 @@ public class SocialMediaController {
     }
 
     private void postLoginAccountHandler(Context ctx) throws JsonProcessingException {
-
+        ObjectMapper mapper = new ObjectMapper();
+        Account account = mapper.readValue(ctx.body(), Account.class);
+        Account addedAccount = accountService.loginAccount(account);
+        if(addedAccount != null){
+            ctx.json(mapper.writeValueAsString(addedAccount));
+        }else{
+            ctx.status(401);
+        }
     }
 
     private void postNewMessageHandler(Context ctx) throws JsonProcessingException {
-
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(ctx.body(), Message.class);
+        Message addedMessage = messageService.addMessage(message);
+        if(addedMessage != null){
+            ctx.json(mapper.writeValueAsString(addedMessage));
+        }else{
+            ctx.status(400);
+        }
     }
 
     private void getAllMessagesHandler(Context ctx){
-
+        List<Message> message = messageService.getAllMessages();
+        ctx.json(message);
     }
 
     private void getMessageByIdHandler(Context ctx){
-
+        String messageId = ctx.pathParam("message_id");
+        Message message = messageService.getMessageByMessageId(Integer.parseInt(messageId));
+        ctx.json(message);
     }
 
     private void deleteMessageHandler(Context ctx){
-
+        String messageId = ctx.pathParam("message_id");
+        Message message = messageService.deleteMessage(Integer.parseInt(messageId));
+        ctx.json(message);
     }
 
-    private void patchMessageHandler(Context ctx){
-
+    private void patchMessageHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(ctx.body(), Message.class);
+        Message updatedMessage = messageService.replaceMessage(message);
+        if(updatedMessage != null){
+            ctx.json(mapper.writeValueAsString(updatedMessage));
+        }else{
+            ctx.status(400);
+        }
     }
 
     private void getMessagesByAccountHandler(Context ctx){
-
+        String accountId = ctx.pathParam("account_id");
+        List<Message> message = messageService.getAllMessagesFromAccount(Integer.parseInt(accountId));
+        ctx.json(message);
     }
 
 
