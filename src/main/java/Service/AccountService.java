@@ -22,10 +22,13 @@ public class AccountService {
     }
 
     public Account loginAccount(Account account){
-        Account newAccount = accountDAO.getAccountByUsername(account.getUsername());
-        if (account.getPassword() == newAccount.getPassword()) {
-            return newAccount;
+        if(accountDAO.getAccountByUsername(account.getUsername()) != null){
+            Account newAccount = accountDAO.getAccountByUsername(account.getUsername());
+            if (account.getPassword().equals(newAccount.getPassword())) {
+                return newAccount;
+            }
         }
+
         return null;
     }
 }
