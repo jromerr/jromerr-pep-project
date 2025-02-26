@@ -32,8 +32,27 @@ public class MessageDAO {
         return messages;
     }
 
-    public List<Message> getAllMessagesByAccountId(){
-        return null;
+    public List<Message> getAllMessagesByAccountId(int accId){
+        Connection connection = ConnectionUtil.getConnection();
+        List<Message> messages = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM message WHERE posted_by = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, accId);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Message msg = new Message(
+                    rs.getInt("message_id"),
+                    rs.getInt("posted_by"),
+                    rs.getString("message_text"),
+                    rs.getLong("time_posted_epoch")
+                );
+                messages.add(msg);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return messages;
     }
     
     public Message insertMessage(Message message){
